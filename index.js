@@ -1,6 +1,10 @@
 const express = require("express");
+const dbo = require("./db/db");
 const app = express();
 const port = 4443;
+
+dbo.connectToServer();
+
 
 app.get("/", function (req, res) {
   res.send("Hello World!");
