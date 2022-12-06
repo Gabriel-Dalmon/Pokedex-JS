@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb-legacy");
+const { MongoClient, ObjectId } = require("mongodb-legacy");
 const connectionString =
   "mongodb+srv://app:oEHwL9yaYzt0Aopg@Projet5Pokedex.shjpvyn.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(connectionString, {
@@ -24,4 +24,8 @@ module.exports = {
     getDb: function () {
         return dbConnection;
     },
+
+    getObjectId: function(id) {
+      return ObjectId(id);
+    }
 };
