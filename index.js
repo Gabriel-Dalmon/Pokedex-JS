@@ -70,11 +70,21 @@ app.post('/pokemon/update', jsonParser, (req, res) => {
 	const body = req.body;
 	const dbConnect = dbo.getDb();
   
-	console.log('Got body:', body);
-	console.log(body["get"])
+  /*let get;
+  if (body["get"].id){
+    var ObjectID = require("mongodb-legacy").ObjectId;
+    get = {"_id":ObjectID(body["get"].id)};
+  } else {
+    get = body["get"];
+  };*/
   
-	/*dbConnect
+	dbConnect
 	  .collection("Pokemon")
-	  .updateOne(body);*/
-	res.json(body);
+	  .updateOne(body["get"], {$set: body["set"]}, {upsert: (req.query.upsert==="true")})
+    .then(function(result, err) {
+      if (err){
+        res.status(400).send(err)
+      };
+      res.json(result);
+    });
   });
