@@ -1,10 +1,10 @@
 import Menu from './../components/Menu';
 
-function HomePage(props) {
+function AdminPanel(props) {
     return <>
         <Menu />
-        <h1>Homepage</h1>
+        <h1>Admin Board</h1>
     </>
 }
 
-export default HomePage;
+export default AdminPanel;

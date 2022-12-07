@@ -1,21 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
-import './pages/AdminBoard';
-import './pages/HomePage';
-import './pages/PokedexPage';
+import AdminPanel from './pages/AdminPanel';
+import HomePage from './pages/HomePage';
+import PokedexPage from './pages/PokedexPage';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
-function App() {
+
+function App(props) {
   return (
     <Router>
         <Switch>
-          <Route exact path="/"> //ici on met l'URL dans le navigateur
-            <HomePage /> //ici on donne la page à afficher en fonction de cette URL
+          <Route exact path="/">
+            <HomePage />
           </Route>
           <Route path="/pokedex">
             <PokedexPage />
           </Route>
           <Route path="/adminpanel">
-            <AdminBoard />
+            <AdminPanel />
           </Route>
         </Switch>
     </Router>
