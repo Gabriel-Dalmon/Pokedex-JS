@@ -1,24 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
+import './pages/AdminBoard';
+import './pages/HomePage';
+import './pages/PokedexPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        <Switch>
+          <Route exact path="/"> //ici on met l'URL dans le navigateur
+            <HomePage /> //ici on donne la page à afficher en fonction de cette URL
+          </Route>
+          <Route path="/pokedex">
+            <PokedexPage />
+          </Route>
+          <Route path="/adminpanel">
+            <AdminBoard />
+          </Route>
+        </Switch>
+    </Router>
   );
 }
 
