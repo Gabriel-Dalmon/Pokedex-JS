@@ -1,11 +1,15 @@
 const express = require("express");
 const dbo = require("./db/db");
 const bodyParser = require('body-parser');
+var cors = require('cors')
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors())
 const port = 4443;
-const Pokemon = require('pokemon.js');
-Pokemon.setLanguage('japanese');
+
+
+
+
 
 dbo.connectToServer();
 
