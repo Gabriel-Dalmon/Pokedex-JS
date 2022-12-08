@@ -1,11 +1,15 @@
 const express = require("express");
 const dbo = require("./db/db");
 const bodyParser = require('body-parser');
+var cors = require('cors')
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors())
 const port = 4443;
-const Pokemon = require('pokemon.js');
-Pokemon.setLanguage('japanese');
+
+
+
+
 
 dbo.connectToServer();
 
@@ -88,3 +92,16 @@ app.post('/pokemon/update', jsonParser, (req, res) => {
       res.json(result);
     });
   });
+
+
+app.delete('/pokemons/delete_all', (req, res) => {
+  const dbConnect = dbo.getDb();
+
+  dbConnect.collection("pokemons").deleteMany({}).then(function(result, err) {
+    if (err){
+      res.status(400).send(err)
+    };
+    res.json(result);
+  });
+
+})
