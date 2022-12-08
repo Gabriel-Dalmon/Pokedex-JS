@@ -25,7 +25,7 @@ app.get("/pokemon/list", function (req, res) {
   const dbConnect = dbo.getDb();
   //premier test permettant de récupérer mes pokemons !
   dbConnect
-    .collection("Pokemon")
+    .collection("pokemons")
     .find({}) // permet de filtrer les résultats
     /*.limit(50) // pourrait permettre de limiter le nombre de résultats */
     .toArray(function (err, result) {
@@ -49,7 +49,7 @@ app.post('/pokemon/insert', jsonParser, (req, res) => {
 	console.log('Got body:', body);
 
 	dbConnect
-		.collection("Pokemon")
+		.collection("pokemons")
 		.insertOne(body);
 	res.json(body);
 });
@@ -61,7 +61,7 @@ app.post('/pokemon/remove', jsonParser, (req, res) => {
 	console.log('Got body:', body);
   
 	dbConnect
-	  .collection("Pokemon")
+	  .collection("pokemons")
 	  .deleteOne(body);
 	res.json(body);
   });
@@ -79,7 +79,7 @@ app.post('/pokemon/update', jsonParser, (req, res) => {
   };*/
   
 	dbConnect
-	  .collection("Pokemon")
+	  .collection("pokemons")
 	  .updateOne(body["get"], {$set: body["set"]}, {upsert: (req.query.upsert==="true")})
     .then(function(result, err) {
       if (err){
