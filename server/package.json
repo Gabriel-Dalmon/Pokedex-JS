@@ -24,6 +24,5 @@
     "mongodb-legacy": "^4.0.0",
     "pokedex-promise-v2": "^4.0.0",
     "pokemon.js": "^1.1.8"
-  },
-  "type":"module"
+  }
 }
