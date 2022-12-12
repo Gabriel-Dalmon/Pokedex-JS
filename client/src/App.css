@@ -51,7 +51,9 @@ nav ul {
 }
 
 nav ul a {
-	color: inherit;
+	color: white;
+  font-weight: 700;
+  font-size: 130%;
 	text-decoration: none;
 }
 
