@@ -1,6 +1,7 @@
 import './App.css';
 import AdminPanel from './pages/AdminPanel';
 import HomePage from './pages/HomePage';
+import PokemonPage from './pages/PokemonPage';
 import PokedexPage from './pages/PokedexPage';
 import {
   BrowserRouter as Router,
@@ -17,6 +18,9 @@ function App(props) {
         <Switch>
           <Route exact path="/">
             <HomePage />
+          </Route>
+          <Route path="/pokemons">
+            <PokemonPage />
           </Route>
           <Route path="/pokedex">
             <PokedexPage />
