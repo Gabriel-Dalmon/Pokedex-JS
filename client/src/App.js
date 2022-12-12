@@ -21,7 +21,7 @@ function App(props) {
           <Route path="/pokedex">
             <PokedexPage />
           </Route>
-          <Route path="/adminpanel">
+          <Route path="/adminpanel/:pageId">
             <AdminPanel />
           </Route>
         </Switch>
