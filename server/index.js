@@ -30,7 +30,7 @@ app.get("/pokemon/list", function (req, res) {
   //premier test permettant de récupérer mes pokemons !
   dbConnect
     .collection("pokemons")
-    .find({}) // permet de filtrer les résultats
+    .find().limit(10) // permet de filtrer les résultats
     /*.limit(50) // pourrait permettre de limiter le nombre de résultats */
     .toArray(function (err, result) {
       if (err) {
@@ -105,3 +105,21 @@ app.delete('/pokemons/delete_all', (req, res) => {
   });
 
 })
+
+
+app.post('/pokedex/add', jsonParser, (req, res) => {
+  console.log(req.body)
+	const body = req.body;
+	const dbConnect = dbo.getDb();
+
+	console.log('Got body:', body);
+
+	dbConnect
+		.collection("pokedexes")
+		.insertOne(body).then(function(result, err) {
+      if (err){
+        res.status(400).send(err)
+      };
+      res.json(result);
+    });
+});

@@ -1,5 +1,5 @@
 function PokeBox(props) {
-    {/* typeList may be removed in the future once the type collection is ready? */}
+    /* typeList may be removed in the future once the type collection is ready? */
     const typeList = [
         "normal",
         "grass",
@@ -31,7 +31,7 @@ function PokeBox(props) {
     return (<div className='pokebox'>
                 <div className='top-box'>
                     <div className='img'>
-                        <img src={props.img}/>
+                        <img src={props.img} alt="pokemon"/>
                     </div>
                 </div>
                 <div className='bottom-box'>

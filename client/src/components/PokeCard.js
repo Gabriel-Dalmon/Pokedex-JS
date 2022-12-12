@@ -17,7 +17,7 @@ function PokeCard(props) {
         </Card.Header>
         <div><Card.Img variant="top" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png" /></div>
         <Card.Body>
-            <Card.Title>Weedle</Card.Title>
+            <Card.Title>{props.name}</Card.Title>
             <Card.Text>Bug | Poison</Card.Text>
         </Card.Body>
     </Card>
