@@ -5,7 +5,7 @@ function AdminPanel(props) {
     return <>
         <Menu />
         <h1>Admin Board</h1>
-        <PokeCardsList />
+        <PokeCardsList type="admin" />
     </>
 }
 

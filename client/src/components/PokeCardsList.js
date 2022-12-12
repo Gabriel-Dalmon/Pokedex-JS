@@ -8,9 +8,33 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+const typeList = [
+    "normal",
+    "grass",
+    "fire",
+    "water",
+    "electric",
+    "ice",
+    "fighting",
+    "poison",
+    "ground",
+    "flying",
+    "psychic",
+    "bug",
+    "rock",
+    "ghost",
+    "dark",
+    "dragon",
+    "steel",
+    "fairy",
+]
+
 function PokeCardsList(props) {
     const [ pokemons, setPokemons ] = useState([]);
 
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
     useEffect(() => {
         async function fetchData(){
             const pokemonsGet = await getAll();
@@ -42,14 +66,22 @@ function PokeCardsList(props) {
                                             <div><Card.Img variant="top" src={pokemon.img} /></div>
                                             <Card.Body>
                                                 <Card.Title>{pokemon.name}</Card.Title>
-                                                <Card.Text>{pokemon.types.map((type, key) => {
-                                                    let offset = ""
-                                                    if (key > 0) {
-                                                        offset = " | "
+                                                <Card.Text className="types">{pokemon.types.map((type, key) => {
+                                                    let typeClass=type.name
+                                                    if (!typeList.includes(type.name)) {
+                                                        typeClass="other"
                                                     }
-                                                    return offset + type.name
+
+                                                    return <span className={"type "+typeClass}>{capitalizeFirstLetter(type.name)}</span>
                                                 })}</Card.Text>
-                                                <Button variant="primary" onClick={() => addToPokedex(pokemon)}>Add To Pokedex</Button>
+                                                {
+                                                    () => {
+                                                        console.log(props.type)
+                                                        if (props.type==="pokemons"){
+                                                            return <Button variant="primary" onClick={() => addToPokedex(pokemon)}>Add To Pokedex</Button>
+                                                        }
+                                                    }
+                                                }
                                             </Card.Body>
                                         </Card>
                                     </div>
