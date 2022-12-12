@@ -1,4 +1,3 @@
-import PokeBox from '../components/PokeBox';
 import PokeCardsList from '../components/PokeCardsList';
 import Menu from './../components/Menu';
 

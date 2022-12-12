@@ -12,7 +12,7 @@ function ListPagination(props) {
     const history = useHistory();
 
     function ActivePageEvents(pageId) {
-        history.push("/adminpanel/"+pageId)
+        history.push("/"+props.collection+"/"+pageId)
         setActivePage(pageId);
         console.log(activePage)
     }
