@@ -16,6 +16,21 @@ export const getAllOnPage = async (collection, pageId) => {
     return pokemons
 }
 
+export const getAll = async (collection) => {
+    console.log('http://localhost:4443/'+collection+'/listAll')
+    const response = await fetch(
+        'http://localhost:4443/'+collection+'/listAll', {
+            method: 'GET', 
+            headers: {
+                'Accept': 'application/json', 
+                'Content-Type':'application/json'
+            }
+        }
+    )
+    const documents = await response.json()
+    return documents
+}
+
 export const addToPokedex = async (pokemon) => {
     fetch('http://localhost:4443/pokedex/add',{
         method: 'POST',

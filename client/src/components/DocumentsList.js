@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import { getAllOnPage} from "../api/pokemons";
+import { getAll, getAllOnPage} from "../api/pokemons";
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ListPagination from "./ListPagination";
 
-import PokeCard from "./PokeCard";
 import { getCollectionLength } from '../api/pokemons';
+import DocumentCard from "./DocumentCard";
 
 function DocumentsList (props) {
     const [ documents, setDocuments ] = useState([]);
     const [ activePage, setActivePage ] = useState([]);
     const [ collectionLength, setCollectionLength ] = useState([]);
+    const [ allTypes, setAllTypes ] = useState([])
     //init
     useEffect(() => {
         async function init () {
@@ -20,10 +21,15 @@ function DocumentsList (props) {
             const getColLength = await getCollectionLength(props.collection);
             setActivePage(props.activePage)
             setCollectionLength(getColLength);
+            if(props.mode === "admin"){
+                const getTypes = await getAll("types");
+                setAllTypes(getTypes)
             }
+            }
+
             init();
-            console.log("inited")
-    }, [props.activePage,props.collection])
+            
+    }, [props])
 
     useEffect(() => {
         async function fetchData(){
@@ -42,7 +48,7 @@ function DocumentsList (props) {
                     <Row>
                     {
                         documents.map((document) =>{
-                            return <Col sm={3}><PokeCard pokemon={document} mode={props.mode}/></Col>
+                            return <Col sm={3}><DocumentCard document={document} mode={props.mode} types={allTypes}/></Col>
                         })
                     }
                     </Row>
