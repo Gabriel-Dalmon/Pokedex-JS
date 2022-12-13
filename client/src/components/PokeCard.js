@@ -48,7 +48,7 @@ function PokeCard(props) {
                 </Card.Header>
                 <div><Card.Img variant="top" src={pokemon.img !== null ?pokemon.img: "https://cdn.discordapp.com/attachments/463818480186163200/1052176999680069692/img_573410.png"} /></div>
                 <Card.Body>
-                    <Form><Form.Group><Form.Control style={{textAlign:"center", color:"white", backgroundColor:"rgba(0, 0, 0, 0)", border:"0", fontSize:"1.25rem"}} placeholder="Name" value={pokemon.name}></Form.Control></Form.Group>
+                    <Form><Form.Group><Form.Control plaintext style={{textAlign:"center", color:"white", fontSize:"1.25rem"}} placeholder="Name" value={pokemon.name}></Form.Control></Form.Group>
                     <Card.Title>{pokemon.name}</Card.Title>
                     <Form.Select style={{width:"4rem", color:"white", background:"rgba(0, 0, 0, 0)"}} aria-label="Select Type">
                         <option>+</option>
