@@ -1,4 +1,4 @@
-import PokeCardsList from '../components/PokeCardsList';
+import DocumentsList from '../components/DocumentsList';
 import Menu from './../components/Menu';
 
 function PokedexPage(props) {
@@ -6,7 +6,7 @@ function PokedexPage(props) {
         <Menu />
         <h1>Pokedex</h1>
 
-        <PokeCardsList type="pokedex" />
+        <DocumentsList collection="pokedexes" activePage={1} mode="guest" />
     </>
 }
 

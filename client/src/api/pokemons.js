@@ -1,6 +1,7 @@
-export const getAllOnPage = async (pageId) => {
+export const getAllOnPage = async (collection, pageId) => {
+    console.log('http://localhost:4443/'+collection+'/list')
     const response = await fetch(
-        'http://localhost:4443/pokemons/list', {
+        'http://localhost:4443/'+collection+'/list', {
             method: 'POST', 
             headers: {
                 'Accept': 'application/json', 

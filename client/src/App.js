@@ -19,13 +19,13 @@ function App(props) {
           <Route exact path="/">
             <HomePage />
           </Route>
-          <Route path="/pokemons/:pageId">
+          <Route path="/pokemons">
             <PokemonsPage />
           </Route>
           <Route path="/pokedex">
             <PokedexPage />
           </Route>
-          <Route path="/adminpanel/:pageId">
+          <Route path="/adminpanel">
             <AdminPanel />
           </Route>
         </Switch>
