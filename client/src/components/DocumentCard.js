@@ -10,24 +10,24 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 const typeList = [
-    "Normal",
-    "Grass",
-    "Fire",
-    "Water",
-    "Electric",
-    "Ice",
-    "Fighting",
-    "Poison",
-    "Ground",
-    "Flying",
-    "Psychic",
-    "Bug",
-    "Rock",
-    "Ghost",
-    "Dark",
-    "Dragon",
-    "Steel",
-    "Fairy",
+    "normal",
+    "grass",
+    "fire",
+    "water",
+    "electric",
+    "ice",
+    "fighting",
+    "poison",
+    "ground",
+    "flying",
+    "psychic",
+    "bug",
+    "rock",
+    "ghost",
+    "dark",
+    "dragon",
+    "steel",
+    "fairy",
 ]
 
 function capitalizeFirstLetter(string) {
@@ -101,7 +101,7 @@ function DocumentCard(props) {
 
                             <Card.Text className="types">{editTypes.map((type, key) => {
                                 let typeClass=type.toLowerCase()
-                                if (!typeList.includes(type)) {
+                                if (!typeList.includes(type.toLowerCase())) {
                                     typeClass="other"
                                 }
                                 return <>
