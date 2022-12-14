@@ -47,6 +47,28 @@ app.post("/pokemons/list", jsonParser, (req, res) => {
     
 });
 
+app.get("/types/listAll", (req, res) => {
+  //on se connecte à la DB MongoDB
+  const dbConnect = dbo.getDb();
+  //premier test permettant de récupérer mes pokemons !
+  dbConnect
+    .collection("types")
+    .find() // permet de filtrer les résultats
+    /*.limit(50) // pourrait permettre de limiter le nombre de résultats */
+    .toArray(function (err, result) {
+      if (err) {
+        res.status(400).send("Error fetching pokemons!");
+      } else {
+        res.json(result);
+      }
+    });
+    /*
+    Bref lisez la doc, 
+    il y a plein de manières de faire ce qu'on veut :) 
+    */
+    
+});
+
 app.post('/pokemon/insert', jsonParser, (req, res) => {
 	const body = req.body;
 	const dbConnect = dbo.getDb();
