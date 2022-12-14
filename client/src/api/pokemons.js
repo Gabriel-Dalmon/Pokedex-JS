@@ -47,6 +47,19 @@ export const addToPokedex = async (pokemon) => {
     })
 }
 
+export const removeFromPokedex = async (pokemon) => {
+    fetch('http://localhost:4443/pokedex/remove',{
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json', 
+            'Content-type':'application/json'
+        },
+        body: JSON.stringify({
+            name: pokemon.name
+        } )
+    })
+}
+
 export const getCollectionLength = async (collection) => {
     const response = await fetch('http://localhost:4443/collection/length',{
         method: 'POST',

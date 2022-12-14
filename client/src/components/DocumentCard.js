@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-import {addToPokedex, updateDocument } from "../api/pokemons";
+import {addToPokedex, removeFromPokedex, updateDocument } from "../api/pokemons";
 import { useState } from 'react';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -119,7 +119,10 @@ function DocumentCard(props) {
                                             </>
                                     })}
                                 </DropdownButton>
-                            <Button variant="success" onClick={() => updateDocument(props.collection, document, {"name":editName,"types":editTypes,"imgFile":editFile})}>Save</Button>
+                            <div className='admin-button'>
+                                <Button variant="success" onClick={() => updateDocument(props.collection, document, {"name":editName,"types":editTypes,"imgFile":editFile})}>Save</Button>
+                                {collection==="pokedexes" && <Button variant="danger" onClick={() => removeFromPokedex(document)}>Remove</Button>}
+                            </div>
                         </Card.Body>
                     </Form>
                 </Card>

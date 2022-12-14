@@ -61,39 +61,30 @@ h1 {
   margin-left: 1rem;
 }
 
-.pokebox {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  margin-left: 2rem;
-  border: #4e5258 solid 2px;
-  border-radius: 5%;
-  width: max-content;
-}
-
-.pokebox .top-box {
-  background-color: #4e5258;
-  border-top-left-radius: 5%;
-  border-top-right-radius: 5%;
-}
-
-.pokebox .top-box .img {
+.home {
   text-align: center;
 }
 
-.pokebox .top-box .img img {
-  width: 100%;
-  height: auto;
+.home h1 {
+  font-weight: 700;
 }
 
-.pokebox h2 {
-  text-align: center;
+.home h2 {
+  text-decoration: underline;
 }
 
-.pokebox .bottom-box .types {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
+.home p {
+  margin-left: 500px;
+  margin-right: 500px;
+}
+
+.home p a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  background: -webkit-linear-gradient(45deg,rgba(44,112,176,1), rgba(255,255,0,1));
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .types .type {
@@ -164,34 +155,8 @@ h1 {
   background-color: #689A8D;
 }
 
-.sep {
-  margin: 0;
-  padding: 0;
-  border-bottom: #4e5258 solid 2px;
-}
-
-.home {
-  text-align: center;
-}
-
-.home h1 {
-  font-weight: 700;
-}
-
-.home h2 {
-  text-decoration: underline;
-}
-
-.home p {
-  margin-left: 500px;
-  margin-right: 500px;
-}
-
-.home p a {
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  background: -webkit-linear-gradient(45deg,rgba(44,112,176,1), rgba(255,255,0,1));
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.admin-button {
+  display: flex;
+  justify-content: center;
+  gap: 10%;
 }

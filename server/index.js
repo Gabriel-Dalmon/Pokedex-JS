@@ -181,3 +181,15 @@ app.post('/pokedex/add', jsonParser, (req, res) => {
       res.json(result);
     });
 });
+
+app.post('/pokedex/remove', jsonParser, (req, res) => {
+	const body = req.body;
+	const dbConnect = dbo.getDb();
+  
+	console.log('Got body:', body);
+  
+	dbConnect
+	  .collection("pokedexes")
+	  .deleteOne(body);
+	res.json(body);
+  });
