@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 import {addToPokedex, updateDocument } from "../api/pokemons";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -46,10 +46,21 @@ function DocumentCard(props) {
     const collection = props.collection;
     const [editName, setEditName] = useState(document.name);
     const [editTypes, setEditTypes] = useState(getNamesFromObjects(document.types));
-    const [editFile, setEditFile] = useState([""]);
+    const [editFile, setEditFile] = useState(null);
 
     const [freeTypes, setFreeTypes] = useState(getNamesFromObjects(props.types.slice()).filter(item => !editTypes.slice().includes(item)));
 
+    useEffect(() => {
+        const activeTypes = getNamesFromObjects(document.types)
+        setEditName(document.name)
+        setEditTypes(activeTypes)
+        setFreeTypes(getNamesFromObjects(props.types.slice()).filter(item => !activeTypes.slice().includes(item)))
+    },[props, document]);
+
+    useEffect(() => {
+        if(editFile != null){
+            console.log(editFile)}
+    },[editFile]);
 
 
     if(props.mode === "admin") {
@@ -87,12 +98,11 @@ function DocumentCard(props) {
                         </Nav>
                     </Card.Header>
                     <Form>
-                        <div><label for="fileInput"><Card.Img variant="top" src={document.img !== null ? document.img: "https://cdn.discordapp.com/attachments/463818480186163200/1052176999680069692/img_573410.png"} /></label></div>
+                        <div><label htmlFor="fileInput"><Card.Img variant="top" src={document.img !== null ? document.img: "https://cdn.discordapp.com/attachments/463818480186163200/1052176999680069692/img_573410.png"} /></label></div>
                         
                         <input
                             id="fileInput"
                             type="file"
-                            value={editFile}
                             onChange={(e) => setEditFile(e.target.files[0])}
                             style={{display:"none"}}
                         />
@@ -106,7 +116,7 @@ function DocumentCard(props) {
                                 }
                                 return <>
                                     <input type="hidden" name={"type" + key}></input>
-                                    <span style={{display:"flex", flexDirection:"row"}} className={"type "+typeClass}><span style={{display:"block"}}>{capitalizeFirstLetter(type)}</span><CloseButton onClick={() => removeType(key)}/></span>
+                                    <span style={{display:"inline-flex", flexDirection:"row", flex: "1 1 0"}} className={"type "+typeClass}><span style={{display:"block"}}>{capitalizeFirstLetter(type)}</span><CloseButton onClick={() => removeType(key)}/></span>
                                     </>
                             })}</Card.Text>
                                 <DropdownButton title="+">{freeTypes.map((type, key) => {

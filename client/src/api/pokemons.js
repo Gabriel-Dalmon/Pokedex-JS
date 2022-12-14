@@ -64,15 +64,14 @@ export const getCollectionLength = async (collection) => {
 
 export const updateDocument = async (collection, document, updatedDocument) => {
     if(collection === "pokemons"){
+        const bodyReq = { "name": {updatedDocument.name == document.name ? document.name : updatedDocument.name}}
         const response = await fetch('http://localhost:4443/collection/length',{
             method: 'POST',
             headers: {
                 'Accept': 'application/json', 
                 'Content-type':'application/json'
             },
-            body: JSON.stringify({
-                collection: collection
-            })
+            body: JSON.stringify(bodyReq)
         });
         return response.json();
     }
