@@ -61,3 +61,19 @@ export const getCollectionLength = async (collection) => {
     const length = await response.json();
     return length;
 }
+
+export const updateDocument = async (collection, document, updatedDocument) => {
+    if(collection === "pokemons"){
+        const response = await fetch('http://localhost:4443/collection/length',{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json', 
+                'Content-type':'application/json'
+            },
+            body: JSON.stringify({
+                collection: collection
+            })
+        });
+        return response.json();
+    }
+}
