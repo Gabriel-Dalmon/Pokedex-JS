@@ -10,24 +10,24 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 const typeList = [
-    "Normal",
-    "Grass",
-    "Fire",
-    "Water",
-    "Electric",
-    "Ice",
-    "Fighting",
-    "Poison",
-    "Ground",
-    "Flying",
-    "Psychic",
-    "Bug",
-    "Rock",
-    "Ghost",
-    "Dark",
-    "Dragon",
-    "Steel",
-    "Fairy",
+    "normal",
+    "grass",
+    "fire",
+    "water",
+    "electric",
+    "ice",
+    "fighting",
+    "poison",
+    "ground",
+    "flying",
+    "psychic",
+    "bug",
+    "rock",
+    "ghost",
+    "dark",
+    "dragon",
+    "steel",
+    "fairy",
 ]
 
 function capitalizeFirstLetter(string) {
@@ -43,6 +43,7 @@ function getNamesFromObjects(objectList){
 
 function DocumentCard(props) {
     const document = props.document;
+    const collection = props.collection;
     const [editName, setEditName] = useState(document.name);
     const [editTypes, setEditTypes] = useState(getNamesFromObjects(document.types));
     const [editFile, setEditFile] = useState([""]);
@@ -146,7 +147,8 @@ function DocumentCard(props) {
                         }
                         return <span className={"type "+typeClass}>{capitalizeFirstLetter(type.name)}</span>
                     })}</Card.Text>
-                    <Button variant="primary" onClick={() => addToPokedex(document)}>Add To Pokedex</Button>
+                    {(collection==="pokedexes") && <p>Captured by {document.username}</p>}
+                    {(collection==="pokemons") && <Button variant="primary" onClick={() => addToPokedex(document)}>Add To Pokedex</Button>}
                 </Card.Body>
             </Card>
 }

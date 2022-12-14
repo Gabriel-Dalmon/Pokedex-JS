@@ -142,6 +142,29 @@ app.post('/collection/length', jsonParser, (req, res) => {
   });
 });
 
+app.post("/pokedexes/list", jsonParser, (req, res) => {
+  //on se connecte à la DB MongoDB
+  const pageId = req.body.page
+  const dbConnect = dbo.getDb();
+  //premier test permettant de récupérer mes pokemons !
+  dbConnect
+    .collection("pokedexes")
+    .find().limit(20).skip((pageId-1)*20) // permet de filtrer les résultats
+    /*.limit(50) // pourrait permettre de limiter le nombre de résultats */
+    .toArray(function (err, result) {
+      if (err) {
+        res.status(400).send("Error fetching pokemons!");
+      } else {
+        res.json(result);
+      }
+    });
+    /*
+    Bref lisez la doc, 
+    il y a plein de manières de faire ce qu'on veut :) 
+    */
+    
+});
+
 app.post('/pokedex/add', jsonParser, (req, res) => {
   console.log(req.body)
 	const body = req.body;

@@ -48,7 +48,7 @@ function DocumentsList (props) {
                     <Row>
                     {
                         documents.map((document) =>{
-                            return <Col sm={3}><DocumentCard document={document} mode={props.mode} types={allTypes}/></Col>
+                            return <Col sm={3}><DocumentCard document={document} mode={props.mode} types={allTypes} collection={props.collection}/></Col>
                         })
                     }
                     </Row>
