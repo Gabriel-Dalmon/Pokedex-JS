@@ -10,49 +10,44 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 const typeList = [
-    "normal",
-    "grass",
-    "fire",
-    "water",
-    "electric",
-    "ice",
-    "fighting",
-    "poison",
-    "ground",
-    "flying",
-    "psychic",
-    "bug",
-    "rock",
-    "ghost",
-    "dark",
-    "dragon",
-    "steel",
-    "fairy",
+    "Normal",
+    "Grass",
+    "Fire",
+    "Water",
+    "Electric",
+    "Ice",
+    "Fighting",
+    "Poison",
+    "Ground",
+    "Flying",
+    "Psychic",
+    "Bug",
+    "Rock",
+    "Ghost",
+    "Dark",
+    "Dragon",
+    "Steel",
+    "Fairy",
 ]
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
+function getNamesFromObjects(objectList){
+    const namesOnlyList = objectList.map((object) => {
+        return capitalizeFirstLetter(object.name)
+    });
+    return namesOnlyList;
+}
 
 function DocumentCard(props) {
     const document = props.document;
     const [editName, setEditName] = useState(document.name);
-    const [editTypes, setEditTypes] = useState(document.types);
+    const [editTypes, setEditTypes] = useState(getNamesFromObjects(document.types));
     const [editFile, setEditFile] = useState([""]);
 
-    function capitalizeFirstLetter(string) {
-        console.log(string)
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
-    function getNamesFromObjects(objectList){
-        const namesOnlyList = objectList.map((object) => {
-            console.log(object.name)
-            return capitalizeFirstLetter(object.name)
-        });
-        return namesOnlyList;
-    }
-    
-    const [freeTypes, setFreeTypes] = useState(getNamesFromObjects(props.types.slice()).filter(item => !getNamesFromObjects(editTypes.slice()).includes(item)));//first.filter(x => second.indexOf(x) !== -1)
-    console.log(getNamesFromObjects(props.types),getNamesFromObjects(editTypes), freeTypes)
+    const [freeTypes, setFreeTypes] = useState(getNamesFromObjects(props.types.slice()).filter(item => !editTypes.slice().includes(item)));//first.filter(x => second.indexOf(x) !== -1)
 
 
 
@@ -60,15 +55,21 @@ function DocumentCard(props) {
 
 
         function removeType(typeKey) {
-            let types = editTypes.slice();
-            types.splice(typeKey, 1)
-            setEditTypes(types)
+            let activeTypes = editTypes.slice();
+            let toAddTypes = freeTypes.slice();
+            toAddTypes.splice(typeKey, 1)
+            activeTypes.push(toAddTypes[typeKey])
+            setEditTypes(activeTypes)
+            setFreeTypes(toAddTypes)
         }
 
         function addType(typeKey) {
-            let types = editTypes.slice();
-            types.splice(typeKey, 1)
-            setEditTypes(types)
+            let activeTypes = editTypes.slice();
+            let toAddTypes = freeTypes.slice();
+            activeTypes.push(toAddTypes[typeKey])
+            toAddTypes.splice(typeKey, 1)
+            setEditTypes(activeTypes)
+            setFreeTypes(toAddTypes)
         }
 
         return <Card bg='dark' text='white' style={{width: '100%',margin: '1rem 0'}} className="text-center bloc-document">
@@ -98,22 +99,22 @@ function DocumentCard(props) {
                             <Form.Group><Form.Control plaintext style={{textAlign:"center", color:"white", fontSize:"1.25rem"}} placeholder="Name" onChange={(e) => setEditName(e.target.value)} value={editName}></Form.Control></Form.Group>
 
                             <Card.Text className="types">{editTypes.map((type, key) => {
-                                let typeClass=type.name
-                                if (!typeList.includes(type.name)) {
+                                let typeClass=type.toLowerCase()
+                                if (!typeList.includes(type)) {
                                     typeClass="other"
                                 }
                                 return <>
                                     <input type="hidden" name={"type" + key}></input>
-                                    <span className={"type "+typeClass}>{capitalizeFirstLetter(type.name)}<CloseButton onClick={() => removeType(key)}/></span>
+                                    <span className={"type "+typeClass}>{capitalizeFirstLetter(type)}<CloseButton onClick={() => removeType(key)}/></span>
                                     </>
                             })}</Card.Text>
                                 <DropdownButton title="+">{freeTypes.map((type, key) => {
-                                        let typeClass=type.name
-                                        if (!typeList.includes(type.name)) {
+                                        let typeClass=type
+                                        if (!typeList.includes(type)) {
                                             typeClass="other"
                                         }
                                         return <>
-                                            <Dropdown.Item className={"type "+typeClass} onClick={() => addType(key)}>{capitalizeFirstLetter(type.name)}</Dropdown.Item>
+                                            <Dropdown.Item className={"type "+typeClass} onClick={() => addType(key)}>{capitalizeFirstLetter(type)}</Dropdown.Item>
                                             </>
                                     })}
                                 </DropdownButton>
