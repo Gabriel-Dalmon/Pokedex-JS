@@ -10,24 +10,24 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 const typeList = [
-    "normal",
-    "grass",
-    "fire",
-    "water",
-    "electric",
-    "ice",
-    "fighting",
-    "poison",
-    "ground",
-    "flying",
-    "psychic",
-    "bug",
-    "rock",
-    "ghost",
-    "dark",
-    "dragon",
-    "steel",
-    "fairy",
+    "Normal",
+    "Grass",
+    "Fire",
+    "Water",
+    "Electric",
+    "Ice",
+    "Fighting",
+    "Poison",
+    "Ground",
+    "Flying",
+    "Psychic",
+    "Bug",
+    "Rock",
+    "Ghost",
+    "Dark",
+    "Dragon",
+    "Steel",
+    "Fairy",
 ]
 
 function capitalizeFirstLetter(string) {
@@ -48,7 +48,7 @@ function DocumentCard(props) {
     const [editTypes, setEditTypes] = useState(getNamesFromObjects(document.types));
     const [editFile, setEditFile] = useState([""]);
 
-    const [freeTypes, setFreeTypes] = useState(getNamesFromObjects(props.types.slice()).filter(item => !editTypes.slice().includes(item)));//first.filter(x => second.indexOf(x) !== -1)
+    const [freeTypes, setFreeTypes] = useState(getNamesFromObjects(props.types.slice()).filter(item => !editTypes.slice().includes(item)));
 
 
 
@@ -106,7 +106,7 @@ function DocumentCard(props) {
                                 }
                                 return <>
                                     <input type="hidden" name={"type" + key}></input>
-                                    <span className={"type "+typeClass}>{capitalizeFirstLetter(type)}<CloseButton onClick={() => removeType(key)}/></span>
+                                    <span style={{display:"flex", flexDirection:"row"}} className={"type "+typeClass}><span style={{display:"block"}}>{capitalizeFirstLetter(type)}</span><CloseButton onClick={() => removeType(key)}/></span>
                                     </>
                             })}</Card.Text>
                                 <DropdownButton title="+">{freeTypes.map((type, key) => {
