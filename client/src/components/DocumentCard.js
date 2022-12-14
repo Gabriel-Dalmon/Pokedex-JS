@@ -30,25 +30,31 @@ const typeList = [
     "fairy",
 ]
 
-function substractArrays (edits,references) {
-    references.map((reference) => {
-        if(reference in edits){
-            x=0
-        }
-    })
-    return edits
-}
+
 
 function DocumentCard(props) {
     const document = props.document;
     const [editName, setEditName] = useState(document.name);
     const [editTypes, setEditTypes] = useState(document.types);
-    const [editFile, setEditFile] = useState(null);
-    const [freeTypes, setFreeTypes] = useState(props.types)//substractArrays(props.types, editTypes)
+    const [editFile, setEditFile] = useState([""]);
 
     function capitalizeFirstLetter(string) {
+        console.log(string)
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
+
+    function getNamesFromObjects(objectList){
+        const namesOnlyList = objectList.map((object) => {
+            console.log(object.name)
+            return capitalizeFirstLetter(object.name)
+        });
+        return namesOnlyList;
+    }
+    
+    const [freeTypes, setFreeTypes] = useState(getNamesFromObjects(props.types.slice()).filter(item => !getNamesFromObjects(editTypes.slice()).includes(item)));//first.filter(x => second.indexOf(x) !== -1)
+    console.log(getNamesFromObjects(props.types),getNamesFromObjects(editTypes), freeTypes)
+
+
 
     if(props.mode === "admin") {
 
