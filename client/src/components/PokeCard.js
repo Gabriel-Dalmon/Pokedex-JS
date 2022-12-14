@@ -28,6 +28,9 @@ const typeList = [
 
 function PokeCard(props) {
     const pokemon = props.pokemon
+    const mode = props.mode
+    const type = props.page
+    console.log("THe mode is: "+type)
 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
