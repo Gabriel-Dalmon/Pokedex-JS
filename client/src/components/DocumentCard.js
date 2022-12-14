@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-import {addToPokedex } from "../api/pokemons";
+import {addToPokedex, updateDocument } from "../api/pokemons";
 import { useState } from 'react';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -57,8 +57,8 @@ function DocumentCard(props) {
         function removeType(typeKey) {
             let activeTypes = editTypes.slice();
             let toAddTypes = freeTypes.slice();
-            toAddTypes.splice(typeKey, 1)
-            activeTypes.push(toAddTypes[typeKey])
+            toAddTypes.push(activeTypes[typeKey])
+            activeTypes.splice(typeKey, 1)
             setEditTypes(activeTypes)
             setFreeTypes(toAddTypes)
         }
@@ -86,8 +86,8 @@ function DocumentCard(props) {
                         </Nav>
                     </Card.Header>
                     <Form>
-                        <div><Card.Img variant="top" src={document.img !== null ? document.img: "https://cdn.discordapp.com/attachments/463818480186163200/1052176999680069692/img_573410.png"} /></div>
-                        <label for="fileInput">Change Image</label>
+                        <div><label for="fileInput"><Card.Img variant="top" src={document.img !== null ? document.img: "https://cdn.discordapp.com/attachments/463818480186163200/1052176999680069692/img_573410.png"} /></label></div>
+                        
                         <input
                             id="fileInput"
                             type="file"
@@ -118,7 +118,7 @@ function DocumentCard(props) {
                                             </>
                                     })}
                                 </DropdownButton>
-                            <Button variant="primary" onClick={() => addToPokedex(document)}>Save</Button>
+                            <Button variant="success" onClick={() => updateDocument(props.collection, document, {"name":editName,"types":editTypes,"imgFile":editFile})}>Save</Button>
                         </Card.Body>
                     </Form>
                 </Card>
