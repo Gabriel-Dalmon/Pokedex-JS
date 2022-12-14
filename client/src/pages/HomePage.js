@@ -5,7 +5,7 @@ import {
 function HomePage(props) {
     return <>
         <Menu />
-        <img src="https://th.bing.com/th/id/OIP.pP8u4JOiKUrg7_TpugJ9NAHaEo?pid=ImgDet&rs=1"/>
+        <img src="https://th.bing.com/th/id/OIP.pP8u4JOiKUrg7_TpugJ9NAHaEo?pid=ImgDet&rs=1" alt="Pokemon logo"/>
         <h1>Homepage</h1>
         <h3>Bienvenue</h3>
         <p>Capturez des pokemon et enregistrez les dans votre pokedex, le pokedex vous donnent toutes les infos nécessaires sur les pokemons tel que leurs noms, leur types, ainsi qu'une photo d'eux</p>
