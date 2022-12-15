@@ -8,12 +8,15 @@ import ListPagination from "./ListPagination";
 
 import { getCollectionLength } from '../api/pokemons';
 import DocumentCard from "./DocumentCard";
+import Button from "react-bootstrap/esm/Button";
+import ModalCard from "./ModalCard";
 
 function DocumentsList (props) {
     const [ documents, setDocuments ] = useState([]);
     const [ activePage, setActivePage ] = useState([]);
     const [ collectionLength, setCollectionLength ] = useState([]);
     const [ allTypes, setAllTypes ] = useState([])
+    const [modalShow, setModalShow] = useState(false);
     //init
     useEffect(() => {
         async function init () {
@@ -45,6 +48,16 @@ function DocumentsList (props) {
 
     return <div className="documents-list">
                 <Container>
+                    <>
+                    {(props.collection === "pokemons" && props.mode === "admin") && <Button variant="primary" onClick={() => setModalShow(true)}>
+                        Add a pokemon
+                    </Button>}
+
+                    <ModalCard
+                        show={modalShow}
+                        types={allTypes}
+                        onHide={() => setModalShow(false)} />
+                    </>
                     <Row>
                     {
                         documents.map((document) =>{

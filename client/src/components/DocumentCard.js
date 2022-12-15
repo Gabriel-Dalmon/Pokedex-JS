@@ -1,9 +1,8 @@
 import Card from 'react-bootstrap/Card';
-import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-import {addToPokedex, updateDocument } from "../api/pokemons";
+import {addToPokedex, deletePokemon, removeFromPokedex, updateDocument } from "../api/pokemons";
 import { useState, useEffect } from 'react';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -57,13 +56,13 @@ function DocumentCard(props) {
         setFreeTypes(getNamesFromObjects(props.types.slice()).filter(item => !activeTypes.slice().includes(item)))
     },[props, document]);
 
-    useEffect(() => {
-        if(editFile != null){
-            console.log(editFile)}
-    },[editFile]);
+    // useEffect(() => {
+    //     if(editFile != null){
+    //         console.log(editFile)}
+    // },[editFile]);
 
 
-    if(props.mode === "admin") {
+    if(props.mode === "admin" && props.collection === "pokemons") {
 
 
         function removeType(typeKey) {
@@ -85,20 +84,8 @@ function DocumentCard(props) {
         }
 
         return <Card bg='dark' text='white' style={{width: '100%',margin: '1rem 0'}} className="text-center bloc-document">
-                    <Card.Header>
-                        <Nav justify variant="pills" defaultActiveKey="#first" className="justify-content-center">
-                            <Nav.Item>
-                                <Nav.Link href="#first">Card</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link href="#disabled" disabled>
-                                Detail
-                                </Nav.Link>
-                            </Nav.Item>
-                        </Nav>
-                    </Card.Header>
                     <Form>
-                        <div><label htmlFor="fileInput"><Card.Img variant="top" src={document.img !== null ? document.img: "https://cdn.discordapp.com/attachments/463818480186163200/1052176999680069692/img_573410.png"} /></label></div>
+                        <div><label style={{width:"100%"}} htmlFor="fileInput"><Card.Img variant="top" src={document.img !== null ? document.img: "https://cdn.discordapp.com/attachments/463818480186163200/1052176999680069692/img_573410.png"} /></label></div>
                         
                         <input
                             id="fileInput"
@@ -107,7 +94,7 @@ function DocumentCard(props) {
                             style={{display:"none"}}
                         />
                         <Card.Body>
-                            <Form.Group><Form.Control plaintext style={{textAlign:"center", color:"white", fontSize:"1.25rem"}} placeholder="Name" onChange={(e) => setEditName(e.target.value)} value={editName}></Form.Control></Form.Group>
+                            <Form.Group><Form.Control plaintext required style={{textAlign:"center", color:"white", fontSize:"1.25rem"}} placeholder="Name" onChange={(e) => setEditName(e.target.value)} value={editName}></Form.Control></Form.Group>
 
                             <Card.Text className="types">{editTypes.map((type, key) => {
                                 let typeClass=type.toLowerCase()
@@ -130,35 +117,25 @@ function DocumentCard(props) {
                                     })}
                                 </DropdownButton>
                             <Button variant="success" onClick={() => updateDocument(props.collection, document, {"name":editName,"types":editTypes,"imgFile":editFile})}>Save</Button>
+                            <Button variant="danger" onClick={() => deletePokemon(document)}>Delete</Button>     
                         </Card.Body>
                     </Form>
                 </Card>
     }
     return <Card bg='dark' text='white' style={{width: '100%',margin: '1rem 0'}} className="text-center bloc-document">
-                <Card.Header>
-                    <Nav justify variant="pills" defaultActiveKey="#first" className="justify-content-center">
-                        <Nav.Item>
-                            <Nav.Link href="#first">Card</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link href="#disabled" disabled>
-                            Detail
-                            </Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                </Card.Header>
                 <div><Card.Img variant="top" src={document.img !== null ?document.img: "https://cdn.discordapp.com/attachments/463818480186163200/1052176999680069692/img_573410.png"} /></div>
                 <Card.Body>
                     <Card.Title>{document.name}</Card.Title>
-                    <Card.Text className="types">{document.types.map((type, key) => {
-                        let typeClass=type.name
-                        if (!typeList.includes(type.name)) {
+                    <Card.Text className="types">{editTypes.map((type, key) => {
+                        let typeClass=type.toLowerCase()
+                        if (!typeList.includes(capitalizeFirstLetter(type))) {
                             typeClass="other"
                         }
-                        return <span className={"type "+typeClass}>{capitalizeFirstLetter(type.name)}</span>
+                        return <span className={"type "+typeClass}>{capitalizeFirstLetter(type)}</span>
                     })}</Card.Text>
                     {(collection==="pokedexes") && <p>Captured by {document.username}</p>}
                     {(collection==="pokemons") && <Button variant="primary" onClick={() => addToPokedex(document)}>Add To Pokedex</Button>}
+                    {(collection==="pokedexes" && props.mode === "admin") && <Button variant="danger" onClick={() => removeFromPokedex(document)}>Remove</Button>}
                 </Card.Body>
             </Card>
 }
