@@ -3,7 +3,7 @@
 ## Overview
 
 Welcome to the Pokedex Website repository! This project is a web application that allows users to **explore and manage Pokemon information**. It consists of a **backend API** built with **Node.js** and **Express.js**, a **frontend interface** developed using **React.js**, and a NoSQL **MongoDB** database. The website also integrates with **AWS S3** servers for hosting Pokemon images.
-![Pokedex Banner](https://cdn.discordapp.com/attachments/463818480186163200/1111259896332177428/image.png)
+![Pokedex Banner](https://cdn.discordapp.com/attachments/463818480186163200/1111260089022697472/image.png)
 ## Features
 
 - Browse through a list of Pokemon using the pagination.
